@@ -1,5 +1,6 @@
 import random
 import tkinter as tk
+from tkinter import messagebox
 
 class AllPage:
     def __init__(self, parent=None):
@@ -55,9 +56,11 @@ class AllPage:
         else:
             # 作为子模块调用：依附于主窗口
             self.root = tk.Toplevel(self.parent)
+            messagebox.showinfo("刘朴迪提示","注意：隐藏提示可能不置顶！")
 
         self.root.title("今日人品生成器")
         self.root.geometry("400x300")
+        self.root.attributes('-topmost', True)
 
         button1 = tk.Button(self.root, text="今日人品", command=self.button1_pressed)
         button1.pack(pady=20)

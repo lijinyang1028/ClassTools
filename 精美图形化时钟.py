@@ -310,6 +310,8 @@ class BeautifulClock:
         self.root.mainloop()
     
     def rptest(self):
+        self.is_topmost = False
+        self.topmost_btn.config(text="窗口置顶")
         rp = renpin.AllPage(parent = self.root)
         rp.mainpage()
         return
