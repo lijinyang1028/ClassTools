@@ -3,6 +3,8 @@
 """
 精美图形化时钟 - 多功能现代化时钟
 具有多种主题、动画效果和实用功能
+['苹方_中等', '@苹方_中等', '苹方_常规', '@苹方_常规', '苹方_粗体', '@苹方_粗体', 
+'苹方_特粗', '@苹方_特粗', '苹方_细体', '@苹方_细体', '苹方_特细', '@苹方_特细']
 """
 
 import tkinter as tk
@@ -92,7 +94,7 @@ class BeautifulClock:
         title_label = tk.Label(
             main_container,
             text="刘朴迪",
-            font=('Segoe UI', 16, 'bold'),
+            font=('苹方_常规', 16),
             fg=self.current_info_fg,
             bg=self.current_bg
         )
@@ -106,7 +108,7 @@ class BeautifulClock:
         self.time_label = tk.Label(
             time_frame,
             text="00:00:00",
-            font=('Segoe UI', 72, 'bold'),
+            font=('苹方_特粗', 96),
             fg=self.current_time_fg,
             bg=self.current_bg
         )
@@ -116,7 +118,7 @@ class BeautifulClock:
         self.date_label = tk.Label(
             time_frame,
             text="2026年01月01日 星期一",
-            font=('Segoe UI', 20),
+            font=('苹方_常规', 20),
             fg=self.current_date_fg,
             bg=self.current_bg
         )
@@ -133,7 +135,7 @@ class BeautifulClock:
             command=self.next_theme,
             bg='#4361ee',
             fg='white',
-            font=('Segoe UI', 10),
+            font=('苹方_常规', 15),
             relief='flat',
             padx=15,
             pady=8
@@ -147,7 +149,7 @@ class BeautifulClock:
             command=self.toggle_format,
             bg='#4cc9f0',
             fg='white',
-            font=('Segoe UI', 10),
+            font=('苹方_常规', 15),
             relief='flat',
             padx=15,
             pady=8
@@ -161,7 +163,7 @@ class BeautifulClock:
             command=self.toggle_seconds,
             bg='#7209b7',
             fg='white',
-            font=('Segoe UI', 10),
+            font=('苹方_常规', 15),
             relief='flat',
             padx=15,
             pady=8
@@ -175,7 +177,7 @@ class BeautifulClock:
             command=self.toggle_topmost,
             bg="#ff3791",
             fg='white',
-            font=('Segoe UI', 10),
+            font=('苹方_常规', 15),
             relief='flat',
             padx=15,
             pady=8
@@ -189,7 +191,7 @@ class BeautifulClock:
         info_label = tk.Label(
             info_frame,
             text="ESC退出 | 空格切换主题 | F1切换格式 | F2切换秒显示",
-            font=('Segoe UI', 9),
+            font=('苹方_常规', 9),
             fg=self.current_info_fg,
             bg=self.current_bg
         )
