@@ -12,6 +12,8 @@ from tkinter import font
 from datetime import datetime
 import time
 
+import lucktest as renpin
+
 class BeautifulClock:
     def __init__(self):
         self.root = tk.Tk()
@@ -183,6 +185,21 @@ class BeautifulClock:
             pady=8
         )
         self.topmost_btn.grid(row=0, column=3, padx=5)
+
+        #接入今日人品
+
+        self.renpin_btn = tk.Button(
+            control_frame,
+            text="测试人品",
+            command=self.rptest,
+            bg="#f0524c",
+            fg='white',
+            font=('苹方_常规', 15),
+            relief='flat',
+            padx=15,
+            pady=8
+        )
+        self.renpin_btn.grid(row=0, column=4, padx=5)
         
         # 信息栏
         info_frame = tk.Frame(main_container, bg=self.current_bg)
@@ -190,7 +207,7 @@ class BeautifulClock:
         
         info_label = tk.Label(
             info_frame,
-            text="ESC退出 | 空格切换主题 | F1切换格式 | F2切换秒显示",
+            text="ESC退出 | 空格切换主题 | F1切换格式 | F2切换秒显示 |F3测人品",
             font=('苹方_常规', 9),
             fg=self.current_info_fg,
             bg=self.current_bg
@@ -202,6 +219,7 @@ class BeautifulClock:
         self.root.bind('<space>', lambda e: self.next_theme())
         self.root.bind('<F1>', lambda e: self.toggle_format())
         self.root.bind('<F2>', lambda e: self.toggle_seconds())
+        #self.root.bind('<F3>',lambda e: self.rptest())
         
         # 存储按钮引用以便更新
         self.theme_button = theme_btn
@@ -290,6 +308,11 @@ class BeautifulClock:
     def run(self):
         """运行时钟"""
         self.root.mainloop()
+    
+    def rptest(self):
+        rp = renpin.AllPage(parent = self.root)
+        rp.mainpage()
+        return
 
 def main():
     """主函数"""

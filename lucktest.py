@@ -1,92 +1,77 @@
 import random
 import tkinter as tk
-from tkinter import messagebox
 
-'''
-模块化版本
-请调用AllPage.mainpage()
-'''
-
-class AllPage():
-    @classmethod
-    #root = None
+class AllPage:
+    def __init__(self, parent=None):
+        # 保存主窗口引用，用于创建子窗口
+        self.parent = parent
+        self.result = 0
+        self.label2_text = ""
 
     def random_maker(self):
-        value = int(random.random() * 100 + 1)
-        return value
-    
+        return int(random.random() * 100 + 1)
+
     def button1_pressed(self):
-        page = AllPage()
-        #result = 0
-        #lebal2_text_glo = 0
-        global result
-        global lebal2_text_glo
-        result = page.random_maker()
-        label1.config(text=f"你的今日人品是：{result}")
-        lebal2_text_glo = page.suggester()
-        label2.config(text=lebal2_text_glo)
-        return
-    
-    def close_all(self):
-        luck.destroy()
-        root.quit()
-        return
-    
-    def close_luck(self):
-        luck.destroy()
-        return
-    
-    def luck_window(self):
-        page = AllPage()
-        global luck
-        luck = tk.Tk()
-        luck.title("隐藏款！！！")
-        luck.geometry("200x100")
-        label3 = tk.Label(luck,text=f"🎉恭喜你，人品达到{result}")
-        label3.pack(pady=5)
-        button2 = tk.Button(luck,text="心满意足",command=page.close_all)
-        button2.pack(padx=5)
-        button3 = tk.Button(luck,text="激流勇进",command=page.close_luck)
-        button3.pack()
+        self.result = self.random_maker()
+        self.label1.config(text=f"你的今日人品是：{self.result}")
+        self.label2_text = self.suggester()
+        self.label2.config(text=self.label2_text)
 
     def suggester(self):
-        page = AllPage()
-        if result >= 90:
-            lebal2_text = str("欧皇转世！！！")
-            page.luck_window()
-        elif result >= 60:
-            lebal2_text = str("还算幸运！")
-        elif result >= 30:
-            lebal2_text = ("其实还好啦……")
+        if self.result >= 90:
+            text = "欧皇转世！！！"
+            self.luck_window()
+        elif self.result >= 60:
+            text = "还算幸运！"
+        elif self.result >= 30:
+            text = "其实还好啦……"
         else:
-            lebal2_text = ("emm……这是百分制哦")
-        return lebal2_text
-     
-    def mainpage(self):
-        page = AllPage()
-        global root
-        global label1
-        global label2
-        root = tk.Tk()
-        root.title("今日人品生成器")
-        root.geometry("400x300")
-        button1 = tk.Button(root,text="今日人品",command=page.button1_pressed)
-        button1.pack(pady=20)
-        label1 = tk.Label(root,text=None)
-        label1.pack(pady=20)
-        label2 = tk.Label(root,text=None)
-        label2.pack()
-        root.mainloop()
-        return
+            text = "emm……这是百分制哦"
+        return text
 
-'''class Run():
-    @classmethod
-    def run(self,yes):
-        page = AllPage()
-        page.mainpage()
-        return '''
-    
+    def luck_window(self):
+        # 确定正确的父窗口：如果有传入的 parent 就用它，否则用自己创建的根窗口
+        master = self.parent if self.parent else self.root
+        luck = tk.Toplevel(master)
+        luck.title("隐藏款！！！")
+        luck.geometry("200x100")
+        label3 = tk.Label(luck, text=f"🎉恭喜你，人品达到{self.result}")
+        label3.pack(pady=5)
+
+        def close_luck():
+            luck.destroy()
+
+        def close_all():
+            luck.destroy()
+            self.root.destroy()
+
+        tk.Button(luck, text="心满意足", command=close_all).pack(pady=2)
+        tk.Button(luck, text="激流勇进", command=close_luck).pack(pady=2)
+
+    def mainpage(self):
+        if self.parent is None:
+            # 独立运行模式：创建自己的 Tk 根窗口
+            self.root = tk.Tk()
+        else:
+            # 作为子模块调用：依附于主窗口
+            self.root = tk.Toplevel(self.parent)
+
+        self.root.title("今日人品生成器")
+        self.root.geometry("400x300")
+
+        button1 = tk.Button(self.root, text="今日人品", command=self.button1_pressed)
+        button1.pack(pady=20)
+
+        self.label1 = tk.Label(self.root, text="")
+        self.label1.pack(pady=20)
+
+        self.label2 = tk.Label(self.root, text="")
+        self.label2.pack()
+
+        # 只有独立运行时才需要进入主循环
+        if self.parent is None:
+            self.root.mainloop()
 
 if __name__ == "__main__":
-    page = AllPage()
-    page.mainpage()
+    app = AllPage()
+    app.mainpage()
