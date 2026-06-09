@@ -207,7 +207,7 @@ class BeautifulClock:
         
         info_label = tk.Label(
             info_frame,
-            text="ESC退出 | 空格切换主题 | F1切换格式 | F2切换秒显示 |F3测人品",
+            text="ESC退出 | 空格切换主题 | F1切换格式 | F2切换秒显示 | F3测人品",
             font=('苹方_常规', 9),
             fg=self.current_info_fg,
             bg=self.current_bg
@@ -219,7 +219,7 @@ class BeautifulClock:
         self.root.bind('<space>', lambda e: self.next_theme())
         self.root.bind('<F1>', lambda e: self.toggle_format())
         self.root.bind('<F2>', lambda e: self.toggle_seconds())
-        #self.root.bind('<F3>',lambda e: self.rptest())
+        self.root.bind('<F3>',lambda e: self.rptest())
         
         # 存储按钮引用以便更新
         self.theme_button = theme_btn
